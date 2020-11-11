@@ -429,7 +429,7 @@ public class KThread {
 	/**
 	 * Tests whether this module is working.
 	 */
-	public static void selfTest() {
+	/*public static void selfTest() {
 		Lib.debug(dbgThread, "Enter KThread.selfTest");
 		//KThread thread=new KThread(new PingTest(0)).setName("forked thread");
 //		thread.fork();
@@ -455,7 +455,15 @@ public class KThread {
 //		boolean b=up.execute("echo.coff", s);
 //		System.out.println(b);
 
-     	}
+	}*/
+
+	public static void selfTest() {
+		Lib.debug(dbgThread, "Enter KThread.selfTest");
+
+		new KThread(new PingTest(1)).setName("forked thread").fork();
+		new PingTest(0).run();
+	}
+
 
 	private static final char dbgThread = 't';
 
