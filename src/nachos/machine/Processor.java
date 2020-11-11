@@ -10,11 +10,11 @@ import nachos.security.*;
  * coprocessor support, and can only execute in user mode. Address translation
  * information is accessed via the API. The API also allows a kernel to set an
  * exception handler to be called on any user mode exception.
- * 
+ *
  * <p>
  * The <tt>Processor</tt> API is re-entrant, so a single simulated processor can
  * be shared by multiple user threads.
- * 
+ *
  * <p>
  * An instance of a <tt>Processor</tt> also includes pages of physical memory
  * accessible to user programs, the size of which is fixed by the constructor.
@@ -22,7 +22,7 @@ import nachos.security.*;
 public final class Processor {
 	/**
 	 * Allocate a new MIPS processor, with the specified amount of memory.
-	 * 
+	 *
 	 * @param privilege encapsulates privileged access to the Nachos machine.
 	 * @param numPhysPages the number of pages of physical memory to attach.
 	 */
@@ -57,12 +57,12 @@ public final class Processor {
 
 	/**
 	 * Set the exception handler, called whenever a user exception occurs.
-	 * 
+	 *
 	 * <p>
 	 * When the exception handler is called, interrupts will be enabled, and the
 	 * CPU cause register will specify the cause of the exception (see the
 	 * <tt>exception<i>*</i></tt> constants).
-	 * 
+	 *
 	 * @param exceptionHandler the kernel exception handler.
 	 */
 	public void setExceptionHandler(Runnable exceptionHandler) {
@@ -72,7 +72,7 @@ public final class Processor {
 	/**
 	 * Get the exception handler, set by the last call to
 	 * <tt>setExceptionHandler()</tt>.
-	 * 
+	 *
 	 * @return the exception handler.
 	 */
 	public Runnable getExceptionHandler() {
@@ -105,7 +105,7 @@ public final class Processor {
 
 	/**
 	 * Read and return the contents of the specified CPU register.
-	 * 
+	 *
 	 * @param number the register to read.
 	 * @return the value of the register.
 	 */
@@ -117,7 +117,7 @@ public final class Processor {
 
 	/**
 	 * Write the specified value into the specified CPU register.
-	 * 
+	 *
 	 * @param number the register to write.
 	 * @param value the value to write.
 	 */
@@ -131,20 +131,20 @@ public final class Processor {
 	/**
 	 * Test whether this processor uses a software-managed TLB, or single-level
 	 * paging.
-	 * 
+	 *
 	 * <p>
 	 * If <tt>false</tt>, this processor directly supports single-level paging;
 	 * use <tt>setPageTable()</tt>.
-	 * 
+	 *
 	 * <p>
 	 * If <tt>true</tt>, this processor has a software-managed TLB; use
 	 * <tt>getTLBSize()</tt>, <tt>readTLBEntry()</tt>, and
 	 * <tt>writeTLBEntry()</tt>.
-	 * 
+	 *
 	 * <p>
 	 * Using a method associated with the wrong address translation mechanism
 	 * will result in an assertion failure.
-	 * 
+	 *
 	 * @return <tt>true</tt> if this processor has a software-managed TLB.
 	 */
 	public boolean hasTLB() {
@@ -153,7 +153,7 @@ public final class Processor {
 
 	/**
 	 * Get the current page table, set by the last call to setPageTable().
-	 * 
+	 *
 	 * @return the current page table.
 	 */
 	public TranslationEntry[] getPageTable() {
@@ -166,7 +166,7 @@ public final class Processor {
 	 * Set the page table pointer. All further address translations will use the
 	 * specified page table. The size of the current address space will be
 	 * determined from the length of the page table array.
-	 * 
+	 *
 	 * @param pageTable the page table to use.
 	 */
 	public void setPageTable(TranslationEntry[] pageTable) {
@@ -177,7 +177,7 @@ public final class Processor {
 
 	/**
 	 * Return the number of entries in this processor's TLB.
-	 * 
+	 *
 	 * @return the number of entries in this processor's TLB.
 	 */
 	public int getTLBSize() {
@@ -188,7 +188,7 @@ public final class Processor {
 
 	/**
 	 * Returns the specified TLB entry.
-	 * 
+	 *
 	 * @param number the index into the TLB.
 	 * @return the contents of the specified TLB entry.
 	 */
@@ -201,11 +201,11 @@ public final class Processor {
 
 	/**
 	 * Fill the specified TLB entry.
-	 * 
+	 *
 	 * <p>
 	 * The TLB is fully associative, so the location of an entry within the TLB
 	 * does not affect anything.
-	 * 
+	 *
 	 * @param number the index into the TLB.
 	 * @param entry the new contents of the TLB entry.
 	 */
@@ -219,7 +219,7 @@ public final class Processor {
 	/**
 	 * Return the number of pages of physical memory attached to this simulated
 	 * processor.
-	 * 
+	 *
 	 * @return the number of pages of physical memory.
 	 */
 	public int getNumPhysPages() {
@@ -229,7 +229,7 @@ public final class Processor {
 	/**
 	 * Return a reference to the physical memory array. The size of this array
 	 * is <tt>pageSize * getNumPhysPages()</tt>.
-	 * 
+	 *
 	 * @return the main memory array.
 	 */
 	public byte[] getMemory() {
@@ -238,7 +238,7 @@ public final class Processor {
 
 	/**
 	 * Concatenate a page number and an offset into an address.
-	 * 
+	 *
 	 * @param page the page number. Must be between <tt>0</tt> and
 	 * <tt>(2<sup>32</sup> / pageSize) - 1</tt>.
 	 * @param offset the offset within the page. Must be between <tt>0</tt> and
@@ -254,7 +254,7 @@ public final class Processor {
 
 	/**
 	 * Extract the page number component from a 32-bit address.
-	 * 
+	 *
 	 * @param address the 32-bit address.
 	 * @return the page number component of the address.
 	 */
@@ -264,7 +264,7 @@ public final class Processor {
 
 	/**
 	 * Extract the offset component from an address.
-	 * 
+	 *
 	 * @param address the 32-bit address.
 	 * @return the offset component of the address.
 	 */
@@ -281,7 +281,7 @@ public final class Processor {
 	 * table or a TLB. Check for alignment, make sure the virtual page is valid,
 	 * make sure a read-only page is not being written, make sure the resulting
 	 * physical page is valid, and then return the resulting physical address.
-	 * 
+	 *
 	 * @param vaddr the virtual address to translate.
 	 * @param size the size of the memory reference (must be 1, 2, or 4).
 	 * @param writing <tt>true</tt> if the memory reference is a write.
@@ -360,7 +360,7 @@ public final class Processor {
 	/**
 	 * Read </i>size</i> (1, 2, or 4) bytes of virtual memory at <i>vaddr</i>,
 	 * and return the result.
-	 * 
+	 *
 	 * @param vaddr the virtual address to read from.
 	 * @param size the number of bytes to read (1, 2, or 4).
 	 * @return the value read.
@@ -386,7 +386,7 @@ public final class Processor {
 	/**
 	 * Write <i>value</i> to </i>size</i> (1, 2, or 4) bytes of virtual memory
 	 * starting at <i>vaddr</i>.
-	 * 
+	 *
 	 * @param vaddr the virtual address to write to.
 	 * @param size the number of bytes to write (1, 2, or 4).
 	 * @param value the value to store.
@@ -405,7 +405,7 @@ public final class Processor {
 
 	/**
 	 * Complete the in progress delayed load and scheduled a new one.
-	 * 
+	 *
 	 * @param nextLoadTarget the target register of the new load.
 	 * @param nextLoadValue the value to be loaded into the new target.
 	 * @param nextLoadMask the mask specifying which bits in the new target are
@@ -414,7 +414,7 @@ public final class Processor {
 	 * written.
 	 */
 	private void delayedLoad(int nextLoadTarget, int nextLoadValue,
-			int nextLoadMask) {
+							 int nextLoadMask) {
 		// complete previous delayed load, if not modifying r0
 		if (loadTarget != 0) {
 			int savedBits = registers[loadTarget] & ~loadMask;
@@ -430,12 +430,12 @@ public final class Processor {
 
 	/**
 	 * Advance the PC to the next instruction.
-	 * 
+	 *
 	 * <p>
 	 * Transfer the contents of the nextPC register into the PC register, and
 	 * then add 4 to the value in the nextPC register. Same as
 	 * <tt>advancePC(readRegister(regNextPC)+4)</tt>.
-	 * 
+	 *
 	 * <p>
 	 * Use after handling a syscall exception so that the processor will move on
 	 * to the next instruction.
@@ -447,7 +447,7 @@ public final class Processor {
 	/**
 	 * Transfer the contents of the nextPC register into the PC register, and
 	 * then write the nextPC register.
-	 * 
+	 *
 	 * @param nextPC the new value of the nextPC register.
 	 */
 	private void advancePC(int nextPC) {
@@ -656,15 +656,15 @@ public final class Processor {
 
 			Mips info;
 			switch (op) {
-			case 0:
-				info = Mips.specialtable[func];
-				break;
-			case 1:
-				info = Mips.regimmtable[rt];
-				break;
-			default:
-				info = Mips.optable[op];
-				break;
+				case 0:
+					info = Mips.specialtable[func];
+					break;
+				case 1:
+					info = Mips.regimmtable[rt];
+					break;
+				default:
+					info = Mips.optable[op];
+					break;
 			}
 
 			operation = info.operation;
@@ -766,71 +766,71 @@ public final class Processor {
 
 			for (int i = 0; i < args.length; i++) {
 				switch (args[i]) {
-				case Mips.RS:
-					System.out.print("$" + rs);
-					minCharsPrinted += 2;
-					maxCharsPrinted += 3;
+					case Mips.RS:
+						System.out.print("$" + rs);
+						minCharsPrinted += 2;
+						maxCharsPrinted += 3;
 
-					if (Lib.test(dbgFullDisassemble)) {
-						System.out
-								.print("#0x" + Lib.toHexString(registers[rs]));
-						minCharsPrinted += 11;
-						maxCharsPrinted += 11;
-					}
-					break;
-				case Mips.RT:
-					System.out.print("$" + rt);
-					minCharsPrinted += 2;
-					maxCharsPrinted += 3;
+						if (Lib.test(dbgFullDisassemble)) {
+							System.out
+									.print("#0x" + Lib.toHexString(registers[rs]));
+							minCharsPrinted += 11;
+							maxCharsPrinted += 11;
+						}
+						break;
+					case Mips.RT:
+						System.out.print("$" + rt);
+						minCharsPrinted += 2;
+						maxCharsPrinted += 3;
 
-					if (Lib.test(dbgFullDisassemble)
-							&& (i != 0 || !test(Mips.DST))
-							&& !test(Mips.DELAYEDLOAD)) {
-						System.out
-								.print("#0x" + Lib.toHexString(registers[rt]));
-						minCharsPrinted += 11;
-						maxCharsPrinted += 11;
-					}
-					break;
-				case Mips.RETURNADDRESS:
-					if (rd == 31)
-						continue;
-				case Mips.RD:
-					System.out.print("$" + rd);
-					minCharsPrinted += 2;
-					maxCharsPrinted += 3;
-					break;
-				case Mips.IMM:
-					System.out.print(imm);
-					minCharsPrinted += 1;
-					maxCharsPrinted += 6;
-					break;
-				case Mips.SHIFTAMOUNT:
-					System.out.print(sh);
-					minCharsPrinted += 1;
-					maxCharsPrinted += 2;
-					break;
-				case Mips.ADDR:
-					System.out.print(imm + "($" + rs);
-					minCharsPrinted += 4;
-					maxCharsPrinted += 5;
+						if (Lib.test(dbgFullDisassemble)
+								&& (i != 0 || !test(Mips.DST))
+								&& !test(Mips.DELAYEDLOAD)) {
+							System.out
+									.print("#0x" + Lib.toHexString(registers[rt]));
+							minCharsPrinted += 11;
+							maxCharsPrinted += 11;
+						}
+						break;
+					case Mips.RETURNADDRESS:
+						if (rd == 31)
+							continue;
+					case Mips.RD:
+						System.out.print("$" + rd);
+						minCharsPrinted += 2;
+						maxCharsPrinted += 3;
+						break;
+					case Mips.IMM:
+						System.out.print(imm);
+						minCharsPrinted += 1;
+						maxCharsPrinted += 6;
+						break;
+					case Mips.SHIFTAMOUNT:
+						System.out.print(sh);
+						minCharsPrinted += 1;
+						maxCharsPrinted += 2;
+						break;
+					case Mips.ADDR:
+						System.out.print(imm + "($" + rs);
+						minCharsPrinted += 4;
+						maxCharsPrinted += 5;
 
-					if (Lib.test(dbgFullDisassemble)) {
-						System.out
-								.print("#0x" + Lib.toHexString(registers[rs]));
-						minCharsPrinted += 11;
-						maxCharsPrinted += 11;
-					}
+						if (Lib.test(dbgFullDisassemble)) {
+							System.out
+									.print("#0x" + Lib.toHexString(registers[rs]));
+							minCharsPrinted += 11;
+							maxCharsPrinted += 11;
+						}
 
-					System.out.print(")");
-					break;
-				case Mips.TARGET:
-					System.out.print("0x" + Lib.toHexString(jtarget));
-					minCharsPrinted += 10;
-					maxCharsPrinted += 10;
-					break;
-				default:
-					Lib.assertTrue(false);
+						System.out.print(")");
+						break;
+					case Mips.TARGET:
+						System.out.print("0x" + Lib.toHexString(jtarget));
+						minCharsPrinted += 10;
+						maxCharsPrinted += 10;
+						break;
+					default:
+						Lib.assertTrue(false);
 				}
 				if (i + 1 < args.length) {
 					System.out.print(", ");
@@ -865,170 +865,170 @@ public final class Processor {
 			int preserved;
 
 			switch (operation) {
-			case Mips.ADD:
-				dst = src1 + src2;
-				break;
-			case Mips.SUB:
-				dst = src1 - src2;
-				break;
-			case Mips.MULT:
-				dst = src1 * src2;
-				registers[regLo] = (int) Lib.extract(dst, 0, 32);
-				registers[regHi] = (int) Lib.extract(dst, 32, 32);
-				break;
-			case Mips.DIV:
-				try {
-					registers[regLo] = (int) (src1 / src2);
-					registers[regHi] = (int) (src1 % src2);
-					if (registers[regLo] * src2 + registers[regHi] != src1)
-						throw new ArithmeticException();
-				}
-				catch (ArithmeticException e) {
-					throw new MipsException(exceptionOverflow);
-				}
-				break;
+				case Mips.ADD:
+					dst = src1 + src2;
+					break;
+				case Mips.SUB:
+					dst = src1 - src2;
+					break;
+				case Mips.MULT:
+					dst = src1 * src2;
+					registers[regLo] = (int) Lib.extract(dst, 0, 32);
+					registers[regHi] = (int) Lib.extract(dst, 32, 32);
+					break;
+				case Mips.DIV:
+					try {
+						registers[regLo] = (int) (src1 / src2);
+						registers[regHi] = (int) (src1 % src2);
+						if (registers[regLo] * src2 + registers[regHi] != src1)
+							throw new ArithmeticException();
+					}
+					catch (ArithmeticException e) {
+						throw new MipsException(exceptionOverflow);
+					}
+					break;
 
-			case Mips.SLL:
-				dst = src2 << (src1 & 0x1F);
-				break;
-			case Mips.SRA:
-				dst = src2 >> (src1 & 0x1F);
-				break;
-			case Mips.SRL:
-				dst = src2 >>> (src1 & 0x1F);
-				break;
+				case Mips.SLL:
+					dst = src2 << (src1 & 0x1F);
+					break;
+				case Mips.SRA:
+					dst = src2 >> (src1 & 0x1F);
+					break;
+				case Mips.SRL:
+					dst = src2 >>> (src1 & 0x1F);
+					break;
 
-			case Mips.SLT:
-				dst = (src1 < src2) ? 1 : 0;
-				break;
+				case Mips.SLT:
+					dst = (src1 < src2) ? 1 : 0;
+					break;
 
-			case Mips.AND:
-				dst = src1 & src2;
-				break;
-			case Mips.OR:
-				dst = src1 | src2;
-				break;
-			case Mips.NOR:
-				dst = ~(src1 | src2);
-				break;
-			case Mips.XOR:
-				dst = src1 ^ src2;
-				break;
-			case Mips.LUI:
-				dst = imm << 16;
-				break;
+				case Mips.AND:
+					dst = src1 & src2;
+					break;
+				case Mips.OR:
+					dst = src1 | src2;
+					break;
+				case Mips.NOR:
+					dst = ~(src1 | src2);
+					break;
+				case Mips.XOR:
+					dst = src1 ^ src2;
+					break;
+				case Mips.LUI:
+					dst = imm << 16;
+					break;
 
-			case Mips.BEQ:
-				branch = (src1 == src2);
-				break;
-			case Mips.BNE:
-				branch = (src1 != src2);
-				break;
-			case Mips.BGEZ:
-				branch = (src1 >= 0);
-				break;
-			case Mips.BGTZ:
-				branch = (src1 > 0);
-				break;
-			case Mips.BLEZ:
-				branch = (src1 <= 0);
-				break;
-			case Mips.BLTZ:
-				branch = (src1 < 0);
-				break;
+				case Mips.BEQ:
+					branch = (src1 == src2);
+					break;
+				case Mips.BNE:
+					branch = (src1 != src2);
+					break;
+				case Mips.BGEZ:
+					branch = (src1 >= 0);
+					break;
+				case Mips.BGTZ:
+					branch = (src1 > 0);
+					break;
+				case Mips.BLEZ:
+					branch = (src1 <= 0);
+					break;
+				case Mips.BLTZ:
+					branch = (src1 < 0);
+					break;
 
-			case Mips.JUMP:
-				break;
+				case Mips.JUMP:
+					break;
 
-			case Mips.MFLO:
-				dst = registers[regLo];
-				break;
-			case Mips.MFHI:
-				dst = registers[regHi];
-				break;
-			case Mips.MTLO:
-				registers[regLo] = (int) src1;
-				break;
-			case Mips.MTHI:
-				registers[regHi] = (int) src1;
-				break;
+				case Mips.MFLO:
+					dst = registers[regLo];
+					break;
+				case Mips.MFHI:
+					dst = registers[regHi];
+					break;
+				case Mips.MTLO:
+					registers[regLo] = (int) src1;
+					break;
+				case Mips.MTHI:
+					registers[regHi] = (int) src1;
+					break;
 
-			case Mips.SYSCALL:
-				throw new MipsException(exceptionSyscall);
+				case Mips.SYSCALL:
+					throw new MipsException(exceptionSyscall);
 
-			case Mips.LOAD:
-				value = readMem(addr, size);
+				case Mips.LOAD:
+					value = readMem(addr, size);
 
-				if (!test(Mips.UNSIGNED))
-					dst = Lib.extend(value, 0, size * 8);
-				else
-					dst = value;
+					if (!test(Mips.UNSIGNED))
+						dst = Lib.extend(value, 0, size * 8);
+					else
+						dst = value;
 
-				break;
+					break;
 
-			case Mips.LWL:
-				value = readMem(addr & ~0x3, 4);
+				case Mips.LWL:
+					value = readMem(addr & ~0x3, 4);
 
-				// LWL shifts the input left so the addressed byte is highest
-				preserved = (3 - (addr & 0x3)) * 8; // number of bits to
-													// preserve
-				mask = -1 << preserved; // preserved bits are 0 in mask
-				dst = value << preserved; // shift input to correct place
-				addr &= ~0x3;
+					// LWL shifts the input left so the addressed byte is highest
+					preserved = (3 - (addr & 0x3)) * 8; // number of bits to
+					// preserve
+					mask = -1 << preserved; // preserved bits are 0 in mask
+					dst = value << preserved; // shift input to correct place
+					addr &= ~0x3;
 
-				break;
+					break;
 
-			case Mips.LWR:
-				value = readMem(addr & ~0x3, 4);
+				case Mips.LWR:
+					value = readMem(addr & ~0x3, 4);
 
-				// LWR shifts the input right so the addressed byte is lowest
-				preserved = (addr & 0x3) * 8; // number of bits to preserve
-				mask = -1 >>> preserved; // preserved bits are 0 in mask
-				dst = value >>> preserved; // shift input to correct place
-				addr &= ~0x3;
+					// LWR shifts the input right so the addressed byte is lowest
+					preserved = (addr & 0x3) * 8; // number of bits to preserve
+					mask = -1 >>> preserved; // preserved bits are 0 in mask
+					dst = value >>> preserved; // shift input to correct place
+					addr &= ~0x3;
 
-				break;
+					break;
 
-			case Mips.STORE:
-				writeMem(addr, size, (int) src2);
-				break;
+				case Mips.STORE:
+					writeMem(addr, size, (int) src2);
+					break;
 
-			case Mips.SWL:
-				value = readMem(addr & ~0x3, 4);
+				case Mips.SWL:
+					value = readMem(addr & ~0x3, 4);
 
-				// SWL shifts highest order byte into the addressed position
-				preserved = (3 - (addr & 0x3)) * 8;
-				mask = -1 >>> preserved;
-				dst = src2 >>> preserved;
+					// SWL shifts highest order byte into the addressed position
+					preserved = (3 - (addr & 0x3)) * 8;
+					mask = -1 >>> preserved;
+					dst = src2 >>> preserved;
 
-				// merge values
-				dst = (dst & mask) | (value & ~mask);
+					// merge values
+					dst = (dst & mask) | (value & ~mask);
 
-				writeMem(addr & ~0x3, 4, (int) dst);
-				break;
+					writeMem(addr & ~0x3, 4, (int) dst);
+					break;
 
-			case Mips.SWR:
-				value = readMem(addr & ~0x3, 4);
+				case Mips.SWR:
+					value = readMem(addr & ~0x3, 4);
 
-				// SWR shifts the lowest order byte into the addressed position
-				preserved = (addr & 0x3) * 8;
-				mask = -1 << preserved;
-				dst = src2 << preserved;
+					// SWR shifts the lowest order byte into the addressed position
+					preserved = (addr & 0x3) * 8;
+					mask = -1 << preserved;
+					dst = src2 << preserved;
 
-				// merge values
-				dst = (dst & mask) | (value & ~mask);
+					// merge values
+					dst = (dst & mask) | (value & ~mask);
 
-				writeMem(addr & ~0x3, 4, (int) dst);
-				break;
+					writeMem(addr & ~0x3, 4, (int) dst);
+					break;
 
-			case Mips.UNIMPL:
-				System.err.println("Warning: encountered unimplemented inst");
+				case Mips.UNIMPL:
+					System.err.println("Warning: encountered unimplemented inst");
 
-			case Mips.INVALID:
-				throw new MipsException(exceptionIllegalInstruction);
+				case Mips.INVALID:
+					throw new MipsException(exceptionIllegalInstruction);
 
-			default:
-				Lib.assertNotReached();
+				default:
+					Lib.assertNotReached();
 			}
 		}
 
@@ -1127,7 +1127,7 @@ public final class Processor {
 		static final char RS = 's', RT = 't', RD = 'd', IMM = 'i',
 				SHIFTAMOUNT = 'h', ADDR = 'a', // imm(rs)
 				TARGET = 'j', RETURNADDRESS = 'r'; // rd, or none if rd=31;
-													// can't be last
+		// can't be last
 
 		static final Mips[] optable = {
 				new Mips(), // special

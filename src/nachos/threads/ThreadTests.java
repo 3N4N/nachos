@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package nachos.threads;
 
@@ -14,65 +14,65 @@ import nachos.machine.Machine;
 public class ThreadTests {
 	public ThreadTests()
 	{
-	
+
 	}
-	
+
 	//Thread classes for testing
 	private static class PingTest implements Runnable {
 		PingTest(int which) {
-		    this.which = which;
+			this.which = which;
 		}
-		
+
 		public void run() {
-		    for (int i=0; i<5; i++) {
-			System.out.println("*** thread " + which + " looped "
-					   + i + " times");
-			KThread.currentThread().yield();
-		    }
+			for (int i=0; i<5; i++) {
+				System.out.println("*** thread " + which + " looped "
+						+ i + " times");
+				KThread.currentThread().yield();
+			}
 		}
 
 		private int which;
-	    }
+	}
 
-	    private static class Listener implements Runnable {
-	    	static int id = 0;
-	    	private int localID;
-	    	Listener(Communicator comm)
-	    	{
-	    		communicator = comm;
-	    		localID = id++;
-	    	}
-			public void run() {
-				System.out.println("L" + localID + ":I'm listening for a word");
-				System.out.println("L" + localID + ":I got the word -> " + communicator.listen());
-				
-			}
-	    	private Communicator communicator;
-	    }
-	    private static class Speaker implements Runnable {
-	    	static int id = 0;
-	    	private int localID;
-	    	Speaker(Communicator comm)
-	    	{
-	    		localID= id++;
-	    		communicator = comm;
-	    	}
-			public void run() {
-				System.out.println("S" + localID + ":I'm Speaking my ID number -> " + localID);
-				communicator.speak(localID);
-				
-			}
-	    	private Communicator communicator;
-	    }
-	    private static class ThreadHogger implements Runnable{
-	    	public int d = 0;
-	    		public void run() {
-	    			while(d==0){KThread.yield();}
-	
-	    	}
-	    
-	    }
-	    
+	private static class Listener implements Runnable {
+		static int id = 0;
+		private int localID;
+		Listener(Communicator comm)
+		{
+			communicator = comm;
+			localID = id++;
+		}
+		public void run() {
+			System.out.println("L" + localID + ":I'm listening for a word");
+			System.out.println("L" + localID + ":I got the word -> " + communicator.listen());
+
+		}
+		private Communicator communicator;
+	}
+	private static class Speaker implements Runnable {
+		static int id = 0;
+		private int localID;
+		Speaker(Communicator comm)
+		{
+			localID= id++;
+			communicator = comm;
+		}
+		public void run() {
+			System.out.println("S" + localID + ":I'm Speaking my ID number -> " + localID);
+			communicator.speak(localID);
+
+		}
+		private Communicator communicator;
+	}
+	private static class ThreadHogger implements Runnable{
+		public int d = 0;
+		public void run() {
+			while(d==0){KThread.yield();}
+
+		}
+
+	}
+
 	//test cases
 	//Simple join test
 	public static void joinTest1()
@@ -84,7 +84,7 @@ public class ThreadTests {
 		new PingTest(0).run();
 		System.out.println("JOIN TEST #1: Finished");
 	}
-	
+
 	//join a thread after is has already finished
 	public static void joinTest2()
 	{
@@ -99,10 +99,10 @@ public class ThreadTests {
 		KThread.yield();
 		ping1.join();
 		new PingTest(0).run();
-		
+
 		System.out.println("JOIN TEST #2: Finished");
-	}	
-	
+	}
+
 	//Test priority donation with join
 	public static void joinTest3()
 	{
@@ -116,7 +116,7 @@ public class ThreadTests {
 		ThreadedKernel.scheduler.setPriority(ping1, 4);
 		ThreadedKernel.scheduler.setPriority(hoggingThread, 6);
 		Machine.interrupt().enable();
-		
+
 		ping1.fork();
 		hoggingThread.fork();
 		System.out.println("joining a low priority thread...");
@@ -124,12 +124,12 @@ public class ThreadTests {
 		new PingTest(0).run();
 		th.d = 1;//stop the thread hogger from running
 		System.out.println("JOIN TEST #3: Finished");
-	}	
-	
+	}
+
 	public static void alarmTest1()
 	{
 		/*
-		 *  Picks a certain amount of ticks between 0 and 1 million and calls 
+		 *  Picks a certain amount of ticks between 0 and 1 million and calls
 		 *  Alarm.waitUntil with this amount of ticks. Does this several times
 		 *  just to show that it works properly.
 		 */
@@ -151,7 +151,7 @@ public class ThreadTests {
 		Communicator comm = new Communicator();
 		new KThread(new Listener(comm)).fork();
 		new KThread(new Speaker(comm)).fork();
-		
+
 	}
 	public static void communicatorTest2()
 	{
@@ -161,7 +161,7 @@ public class ThreadTests {
 		Communicator comm = new Communicator();
 		new KThread(new Speaker(comm)).fork();
 		new KThread(new Listener(comm)).fork();
-		
+
 	}
 	public static void communicatorTest3()
 	{
@@ -177,7 +177,7 @@ public class ThreadTests {
 		new KThread(new Listener(comm)).fork();
 		new KThread(new Speaker(comm)).fork();
 		new KThread(new Speaker(comm)).fork();
-		
+
 	}
 	public static void conditionTest1()
 	{
@@ -196,7 +196,7 @@ public class ThreadTests {
 				System.out.println("Thread has been woken up");
 				lock.release();
 			}
-		});	
+		});
 		KThread thread2 = new KThread(new Runnable(){
 			public void run(){
 				lock.acquire();
@@ -205,7 +205,7 @@ public class ThreadTests {
 				System.out.println("Thread has been woken up");
 				lock.release();
 			}
-		});	
+		});
 		KThread thread3 = new KThread(new Runnable(){
 			public void run(){
 				lock.acquire();
@@ -214,7 +214,7 @@ public class ThreadTests {
 				System.out.println("Thread has been woken up");
 				lock.release();
 			}
-		});	
+		});
 		thread1.fork();
 		thread2.fork();
 		thread3.fork();
@@ -227,7 +227,7 @@ public class ThreadTests {
 		KThread.yield();
 		System.out.println("Condition TEST #1: End");
 	}
-	
+
 	public static void priorityTest1()
 	{
 		/*
@@ -244,7 +244,7 @@ public class ThreadTests {
 				theBestLock.release();
 			}
 		});
-		
+
 		ThreadHogger th = new ThreadHogger();
 		KThread thread2 = new KThread(th);
 		Machine.interrupt().disable();
@@ -262,7 +262,7 @@ public class ThreadTests {
 		KThread.yield();
 		System.out.println("Priority TEST #1: END");
 	}
-	
+
 	public static void priorityTest2()
 	{
 		/*
@@ -290,7 +290,7 @@ public class ThreadTests {
 		ThreadedKernel.scheduler.setPriority(thread2, 5);
 		ThreadedKernel.scheduler.setPriority(thread3, 4);
 		Machine.interrupt().enable();
-		
+
 		thread3.fork();
 		thread2.fork();
 		thread1.fork();

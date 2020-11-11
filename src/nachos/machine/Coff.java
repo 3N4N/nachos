@@ -19,7 +19,7 @@ public class Coff {
 
 	/**
 	 * Load the COFF executable in the specified file.
-	 * 
+	 *
 	 * <p>
 	 * Notes:
 	 * <ol>
@@ -33,7 +33,7 @@ public class Coff {
 	 * purpose of this restriction is to prevent sections from being loaded
 	 * instantaneously while handling page faults).
 	 * </ol>
-	 * 
+	 *
 	 * @param file the file containing the executable.
 	 * @exception EOFException if the executable is corrupt.
 	 */
@@ -94,7 +94,7 @@ public class Coff {
 
 	/**
 	 * Return the number of sections in the executable.
-	 * 
+	 *
 	 * @return the number of sections in the executable.
 	 */
 	public int getNumSections() {
@@ -105,7 +105,7 @@ public class Coff {
 	 * Return an object that can be used to access the specified section. Valid
 	 * section numbers include <tt>0</tt> through <tt>getNumSections() -
 	 * 1</tt>.
-	 * 
+	 *
 	 * @param sectionNumber the section to select.
 	 * @return an object that can be used to access the specified section.
 	 */
@@ -118,7 +118,7 @@ public class Coff {
 	/**
 	 * Return the program entry point. This is the value that to which the PC
 	 * register should be initialized to before running the program.
-	 * 
+	 *
 	 * @return the program entry point.
 	 */
 	public int getEntryPoint() {

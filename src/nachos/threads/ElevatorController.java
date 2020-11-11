@@ -19,7 +19,7 @@ public class ElevatorController implements ElevatorControllerInterface {
 	 * immediately after this controller is initialized, but not until the
 	 * interupt handler is set. The controller will start receiving events after
 	 * this method returns, but potentially before <tt>run()</tt> is called.
-	 * 
+	 *
 	 * @param controls the controller's interface to the elevator bank. The
 	 * controler must not attempt to access the elevator bank in <i>any</i>
 	 * other way.

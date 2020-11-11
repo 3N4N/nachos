@@ -25,7 +25,7 @@ public abstract class Kernel {
 
 	/**
 	 * Test that this module works.
-	 * 
+	 *
 	 * <b>Warning:</b> this method will not be invoked by the autograder when we
 	 * grade your projects. You should perform all initialization in
 	 * <tt>initialize()</tt>.

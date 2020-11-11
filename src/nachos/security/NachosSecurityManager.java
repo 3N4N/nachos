@@ -20,7 +20,7 @@ import java.security.PrivilegedActionException;
 public class NachosSecurityManager extends SecurityManager {
 	/**
 	 * Allocate a new Nachos security manager.
-	 * 
+	 *
 	 * @param testDirectory the directory usable by the stub file system.
 	 */
 	public NachosSecurityManager(File testDirectory) {
@@ -32,7 +32,7 @@ public class NachosSecurityManager extends SecurityManager {
 	/**
 	 * Return a privilege object for this security manager. This security
 	 * manager must not be the active security manager.
-	 * 
+	 *
 	 * @return a privilege object for this security manager.
 	 */
 	public Privilege getPrivilege() {
@@ -173,7 +173,7 @@ public class NachosSecurityManager extends SecurityManager {
 	/**
 	 * Check the specified permission. Some operations are permissible while not
 	 * grading. These operations are regulated here.
-	 * 
+	 *
 	 * @param perm the permission to check.
 	 */
 	public void checkPermission(Permission perm) {
@@ -283,7 +283,7 @@ public class NachosSecurityManager extends SecurityManager {
 	 * Called by the <tt>java.lang.Thread</tt> constructor to determine a thread
 	 * group for a child thread of the current thread. The caller must be
 	 * privileged in order to successfully create the thread.
-	 * 
+	 *
 	 * @return a thread group for the new thread, or <tt>null</tt> to use the
 	 * current thread's thread group.
 	 */
@@ -303,7 +303,7 @@ public class NachosSecurityManager extends SecurityManager {
 	/**
 	 * Verify that the caller is privileged, so as to check the specified
 	 * permission.
-	 * 
+	 *
 	 * @param perm the permission being checked.
 	 */
 	public void verifyPrivilege(Permission perm) {

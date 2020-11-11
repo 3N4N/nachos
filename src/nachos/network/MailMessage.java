@@ -5,13 +5,13 @@ import nachos.machine.*;
 /**
  * A mail message. Includes a packet header, a mail header, and the actual
  * payload.
- * 
+ *
  * @see nachos.machine.Packet
  */
 public class MailMessage {
 	/**
 	 * Allocate a new mail message to be sent, using the specified parameters.
-	 * 
+	 *
 	 * @param dstLink the destination link address.
 	 * @param dstPort the destination port.
 	 * @param srcLink the source link address.
@@ -19,7 +19,7 @@ public class MailMessage {
 	 * @param contents the contents of the packet.
 	 */
 	public MailMessage(int dstLink, int dstPort, int srcLink, int srcPort,
-			byte[] contents) throws MalformedPacketException {
+					   byte[] contents) throws MalformedPacketException {
 		// make sure the paramters are valid
 		if (dstPort < 0 || dstPort >= portLimit || srcPort < 0
 				|| srcPort >= portLimit || contents.length > maxContentsLength)
@@ -42,7 +42,7 @@ public class MailMessage {
 
 	/**
 	 * Allocate a new mail message using the specified packet from the network.
-	 * 
+	 *
 	 * @param packet the packet containg the mail message.
 	 */
 	public MailMessage(Packet packet) throws MalformedPacketException {
@@ -85,7 +85,7 @@ public class MailMessage {
 
 	/**
 	 * The number of bytes in a mail header. The header is formatted as follows:
-	 * 
+	 *
 	 * <table>
 	 * <tr>
 	 * <td>offset</td>

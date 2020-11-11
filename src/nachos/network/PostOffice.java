@@ -8,7 +8,7 @@ import nachos.threads.*;
  * <tt>PostOffice</tt> interacts directly with the network hardware. Because of
  * the network hardware, we are guaranteed that messages will never be
  * corrupted, but they might get lost.
- * 
+ *
  * <p>
  * The post office uses a "postal worker" thread to wait for messages to arrive
  * from the network and to place them in the appropriate queues. This cannot be
@@ -53,9 +53,9 @@ public class PostOffice {
 
 	/**
 	 * Retrieve a message on the specified port, waiting if necessary.
-	 * 
+	 *
 	 * @param port the port on which to wait for a message.
-	 * 
+	 *
 	 * @return the message received.
 	 */
 	public MailMessage receive(int port) {

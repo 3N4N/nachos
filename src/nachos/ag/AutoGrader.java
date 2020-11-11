@@ -23,7 +23,7 @@ public class AutoGrader {
 	/**
 	 * Start this autograder. Extract the <tt>-#</tt> arguments, call
 	 * <tt>init()</tt>, load and initialize the kernel, and call <tt>run()</tt>.
-	 * 
+	 *
 	 * @param privilege encapsulates privileged access to the Nachos machine.
 	 */
 	public void start(Privilege privilege) {
@@ -155,7 +155,7 @@ public class AutoGrader {
 	 * Notify the autograder that the specified thread is the idle thread.
 	 * <tt>KThread.createIdleThread()</tt> <i>must</i> call this method before
 	 * forking the idle thread.
-	 * 
+	 *
 	 * @param idleThread the idle thread.
 	 */
 	public void setIdleThread(KThread idleThread) {
@@ -165,7 +165,7 @@ public class AutoGrader {
 	 * Notify the autograder that the specified thread has moved to the ready
 	 * state. <tt>KThread.ready()</tt> <i>must</i> call this method before
 	 * returning.
-	 * 
+	 *
 	 * @param thread the thread that has been added to the ready set.
 	 */
 	public void readyThread(KThread thread) {
@@ -175,7 +175,7 @@ public class AutoGrader {
 	 * Notify the autograder that the specified thread is now running.
 	 * <tt>KThread.restoreState()</tt> <i>must</i> call this method before
 	 * returning.
-	 * 
+	 *
 	 * @param thread the thread that is now running.
 	 */
 	public void runningThread(KThread thread) {
@@ -196,7 +196,7 @@ public class AutoGrader {
 	 * Notify the autograder that a timer interrupt occurred and was handled by
 	 * software if a timer interrupt handler was installed. Called by the
 	 * hardware timer.
-	 * 
+	 *
 	 * @param privilege proves the authenticity of this call.
 	 * @param time the actual time at which the timer interrupt was issued.
 	 */
@@ -206,7 +206,7 @@ public class AutoGrader {
 
 	/**
 	 * Notify the autograder that a user program executed a syscall instruction.
-	 * 
+	 *
 	 * @param privilege proves the authenticity of this call.
 	 * @return <tt>true</tt> if the kernel exception handler should be called.
 	 */
@@ -218,7 +218,7 @@ public class AutoGrader {
 	/**
 	 * Notify the autograder that <tt>Processor.run()</tt> was invoked. This can
 	 * be used to simulate user programs.
-	 * 
+	 *
 	 * @param privilege proves the authenticity of this call.
 	 */
 	public void runProcessor(Privilege privilege) {
@@ -229,7 +229,7 @@ public class AutoGrader {
 	 * Notify the autograder that a COFF loader is being constructed for the
 	 * specified file. The autograder can use this to provide its own COFF
 	 * loader, or return <tt>null</tt> to use the default loader.
-	 * 
+	 *
 	 * @param file the executable file being loaded.
 	 * @return a loader to use in loading the file, or <tt>null</tt> to use the
 	 * default.
@@ -241,7 +241,7 @@ public class AutoGrader {
 	/**
 	 * Request permission to send a packet. The autograder can use this to drop
 	 * packets very selectively.
-	 * 
+	 *
 	 * @param privilege proves the authenticity of this call.
 	 * @return <tt>true</tt> if the packet should be sent.
 	 */
@@ -253,7 +253,7 @@ public class AutoGrader {
 	/**
 	 * Request permission to receive a packet. The autograder can use this to
 	 * drop packets very selectively.
-	 * 
+	 *
 	 * @param privilege proves the authenticity of this call.
 	 * @return <tt>true</tt> if the packet should be delivered to the kernel.
 	 */

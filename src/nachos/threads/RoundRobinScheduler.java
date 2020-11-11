@@ -21,7 +21,7 @@ public class RoundRobinScheduler extends Scheduler {
 
 	/**
 	 * Allocate a new FIFO thread queue.
-	 * 
+	 *
 	 * @param transferPriority ignored. Round robin schedulers have no priority.
 	 * @return a new FIFO thread queue.
 	 */
@@ -32,7 +32,7 @@ public class RoundRobinScheduler extends Scheduler {
 	private class FifoQueue extends ThreadQueue {
 		/**
 		 * Add a thread to the end of the wait queue.
-		 * 
+		 *
 		 * @param thread the thread to append to the queue.
 		 */
 		public void waitForAccess(KThread thread) {
@@ -43,7 +43,7 @@ public class RoundRobinScheduler extends Scheduler {
 
 		/**
 		 * Remove a thread from the beginning of the queue.
-		 * 
+		 *
 		 * @return the first thread on the queue, or <tt>null</tt> if the queue
 		 * is empty.
 		 */

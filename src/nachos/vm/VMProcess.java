@@ -294,7 +294,7 @@ public class VMProcess extends UserProcess {
 	/**
 	 * Initializes page tables for this process so that the executable can be
 	 * demand-paged.
-	 * 
+	 *
 	 * @return <tt>true</tt> if successful.
 	 */
 
@@ -346,31 +346,31 @@ public class VMProcess extends UserProcess {
 	 * Handle a user exception. Called by <tt>UserKernel.exceptionHandler()</tt>
 	 * . The <i>cause</i> argument identifies which exception occurred; see the
 	 * <tt>Processor.exceptionZZZ</tt> constants.
-	 * 
+	 *
 	 * @param cause
 	 *            the user exception that occurred.
 	 */
-	
+
 	public void handleException(int cause) {
 		Processor processor = Machine.processor();
 
 		switch (cause) {
-		case Processor.exceptionTLBMiss:
-			int address=processor.readRegister(processor.regBadVAddr);
-			int vpn=Machine.processor().pageFromAddress(address);
-			Lib.debug(dbgVM, "\thandleException:TLB miss exception:address "+address+" virtual page "+vpn);
-			pageLock.acquire();
-			boolean isSuccessful=handleTLBFault(address);
-			if(isSuccessful){
-				Lib.debug(dbgVM, "\thandleException:TLB miss handled sucessfully");
-			}else{
-				UThread.finish();
-			}
-			pageLock.release();
-			break;
-		default:
-			super.handleException(cause);
-			break;
+			case Processor.exceptionTLBMiss:
+				int address=processor.readRegister(processor.regBadVAddr);
+				int vpn=Machine.processor().pageFromAddress(address);
+				Lib.debug(dbgVM, "\thandleException:TLB miss exception:address "+address+" virtual page "+vpn);
+				pageLock.acquire();
+				boolean isSuccessful=handleTLBFault(address);
+				if(isSuccessful){
+					Lib.debug(dbgVM, "\thandleException:TLB miss handled sucessfully");
+				}else{
+					UThread.finish();
+				}
+				pageLock.release();
+				break;
+			default:
+				super.handleException(cause);
+				break;
 		}
 	}
 

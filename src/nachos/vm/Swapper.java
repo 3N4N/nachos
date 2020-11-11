@@ -12,19 +12,19 @@ import nachos.threads.ThreadedKernel;
 public class Swapper {
 
 	private int pageSize;
-	
+
 	private OpenFile swapFile;
-	
+
 	private String swapFileName;
-	
+
 	private HashMap<PidAndVpn,Integer> swapTable;
-	
+
 	private HashSet<PidAndVpn> unallocated;
-	
+
 	private LinkedList<Integer> availableLocations;
-	
+
 	private static Swapper instance=null;
-	
+
 	protected final static char dbgVM='v';
 
 	private Swapper(String swapFileName){
@@ -70,14 +70,14 @@ public class Swapper {
 			return index;
 		}
 	}
-	
+
 	public void deletePosition(int pid,int vpn){
 		PidAndVpn key=new PidAndVpn(pid,vpn);
 		if(!swapTable.containsKey(key))return;
 		int availableLocation=swapTable.remove(key);
 		availableLocations.add(availableLocation);
 	}
-	
+
 	public byte[] readFromSwapFile(int pid,int vpn){
 		int position=findEntry(pid,vpn);
 		if(position==-1){
@@ -92,16 +92,16 @@ public class Swapper {
 		}
 		return reader;
 	}
-	
+
 	private int findEntry(int pid, int vpn) {
-        Integer position = swapTable.get(new PidAndVpn(pid, vpn));
-        if (position == null)
-            return -1;
-        else
-            return position.intValue();
-    }
-	
-	
+		Integer position = swapTable.get(new PidAndVpn(pid, vpn));
+		if (position == null)
+			return -1;
+		else
+			return position.intValue();
+	}
+
+
 	public int writeToSwapFile(int pid,int vpn,byte[] page,int offset){
 		int position=allocatePosition(pid,vpn);
 		if(position==-1){
@@ -111,7 +111,7 @@ public class Swapper {
 		swapFile.write(position*pageSize, page, offset, pageSize);
 		return position;
 	}
-	
+
 	public void removeSwapFile(){
 		if(swapFile!=null){
 			swapFile.close();

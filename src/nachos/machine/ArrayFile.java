@@ -8,7 +8,7 @@ package nachos.machine;
 public class ArrayFile extends OpenFileWithPosition {
 	/**
 	 * Allocate a new <tt>ArrayFile</tt>.
-	 * 
+	 *
 	 * @param array the array backing this file.
 	 */
 	public ArrayFile(byte[] array) {

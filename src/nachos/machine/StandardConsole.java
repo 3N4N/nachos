@@ -12,7 +12,7 @@ import java.io.IOException;
 public class StandardConsole implements SerialConsole {
 	/**
 	 * Allocate a new standard console.
-	 * 
+	 *
 	 * @param privilege encapsulates privileged access to the Nachos machine.
 	 */
 	public StandardConsole(Privilege privilege) {
@@ -36,7 +36,7 @@ public class StandardConsole implements SerialConsole {
 	}
 
 	public final void setInterruptHandlers(Runnable receiveInterruptHandler,
-			Runnable sendInterruptHandler) {
+										   Runnable sendInterruptHandler) {
 		this.receiveInterruptHandler = receiveInterruptHandler;
 		this.sendInterruptHandler = sendInterruptHandler;
 	}
@@ -48,7 +48,7 @@ public class StandardConsole implements SerialConsole {
 
 	/**
 	 * Attempt to read a byte from the object backing this console.
-	 * 
+	 *
 	 * @return the byte read, or -1 of no data is available.
 	 */
 	protected int in() {
@@ -74,16 +74,16 @@ public class StandardConsole implements SerialConsole {
 		// invalid if non-ASCII
 		if (c >= 0x80)
 			return -1;
-		// backspace characters
+			// backspace characters
 		else if (c == 0x04 || c == 0x08 || c == 0x19 || c == 0x1B || c == 0x7F)
 			return '\b';
-		// if normal ASCII range, nothing to do
+			// if normal ASCII range, nothing to do
 		else if (c >= 0x20)
 			return c;
-		// newline characters
+			// newline characters
 		else if (c == 0x0A || c == 0x0D)
 			return '\n';
-		// everything else is invalid
+			// everything else is invalid
 		else
 			return -1;
 	}
@@ -121,7 +121,7 @@ public class StandardConsole implements SerialConsole {
 
 	/**
 	 * Write a byte to the object backing this console.
-	 * 
+	 *
 	 * @param value the byte to write.
 	 */
 	protected void out(int value) {

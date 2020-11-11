@@ -20,7 +20,7 @@ public class SynchList {
 	/**
 	 * Add the specified object to the end of the queue. If another thread is
 	 * waiting in <tt>removeFirst()</tt>, it is woken up.
-	 * 
+	 *
 	 * @param o the object to add. Must not be <tt>null</tt>.
 	 */
 	public void add(Object o) {
@@ -35,7 +35,7 @@ public class SynchList {
 	/**
 	 * Remove an object from the front of the queue, blocking until the queue is
 	 * non-empty if necessary.
-	 * 
+	 *
 	 * @return the element removed from the front of the queue.
 	 */
 	public Object removeFirst() {

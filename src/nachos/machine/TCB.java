@@ -12,12 +12,12 @@ import java.security.PrivilegedAction;
  * A TCB simulates the low-level details necessary to create, context-switch,
  * and destroy Nachos threads. Each TCB controls an underlying JVM Thread
  * object.
- * 
+ *
  * <p>
  * Do not use any methods in <tt>java.lang.Thread</tt>, as they are not
  * compatible with the TCB API. Most <tt>Thread</tt> methods will either crash
  * Nachos or have no useful effect.
- * 
+ *
  * <p>
  * Do not use the <i>synchronized</i> keyword <b>anywhere</b> in your code. It's
  * against the rules, <i>and</i> it can easily deadlock nachos.
@@ -33,7 +33,7 @@ public final class TCB {
 	 * Give the TCB class the necessary privilege to create threads. This is
 	 * necessary, because unlike other machine classes that need privilege, we
 	 * want the kernel to be able to create TCB objects on its own.
-	 * 
+	 *
 	 * @param privilege encapsulates privileged access to the Nachos machine.
 	 */
 	public static void givePrivilege(Privilege privilege) {
@@ -51,7 +51,7 @@ public final class TCB {
 		 * either this is the first call to start(), or we're being called in
 		 * the context of another TCB. Since we only allow one TCB to run at a
 		 * time, no synchronization is necessary.
-		 * 
+		 *
 		 * The only way this assumption could be broken is if one of our
 		 * non-Nachos threads used the TCB code.
 		 */
@@ -209,7 +209,7 @@ public final class TCB {
 	/**
 	 * Test if the current JVM thread belongs to a Nachos TCB. The AWT event
 	 * dispatcher is an example of a non-Nachos thread.
-	 * 
+	 *
 	 * @return <tt>true</tt> if the current JVM thread is a Nachos thread.
 	 */
 	public static boolean isNachosThread() {
@@ -353,7 +353,7 @@ public final class TCB {
 	 * reference to the first TCB. After that, only <tt>yield()</tt> can change
 	 * <tt>currentTCB</tt> to the current TCB, and only after
 	 * <tt>waitForInterrupt()</tt> returns.
-	 * 
+	 *
 	 * <p>
 	 * Note that <tt>currentTCB.javaThread</tt> will not be the current thread
 	 * if the current thread is not bound to a TCB (this includes the threads

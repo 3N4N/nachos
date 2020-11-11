@@ -9,11 +9,11 @@ import nachos.machine.TranslationEntry;
 public class PageTable {
 
 	private HashMap<PidAndVpn,TranslationEntry> table;
-	
+
 	private TranslationEntryWithPid[] globalTable;
-	
+
 	private static PageTable instance=null;
-	
+
 	protected static final char dbgVM='v';
 
 	private PageTable(){
@@ -81,7 +81,7 @@ public class PageTable {
 				return;
 			}
 			globalTable[newEntry.ppn]=new TranslationEntryWithPid(pID,newEntry);
-			Lib.debug(dbgVM, "\tsetEntry:insert globalTable["+newEntry.ppn+"]");		
+			Lib.debug(dbgVM, "\tsetEntry:insert globalTable["+newEntry.ppn+"]");
 		}
 		table.put(key, newEntry);
 
@@ -97,7 +97,7 @@ public class PageTable {
 		}
 		return entry;
 	}
-	
+
 	public void updateEntry(int pID,TranslationEntry entry){
 		PidAndVpn key=new PidAndVpn(pID,entry.vpn);
 		if(table.containsKey(key)){
@@ -120,11 +120,11 @@ public class PageTable {
 				return;
 			}
 			globalTable[newEntry.ppn]=new TranslationEntryWithPid(pID,newEntry);
-			Lib.debug(dbgVM, "\tupdateEntry:insert globalTable["+oldEntry.ppn+"]");		
+			Lib.debug(dbgVM, "\tupdateEntry:insert globalTable["+oldEntry.ppn+"]");
 		}
 		table.put(key, newEntry);
 	}
-	
+
 	private TranslationEntry mix(TranslationEntry entry1,TranslationEntry entry2){
 		TranslationEntry mixture=entry1;
 		if(entry1.dirty||entry2.dirty){

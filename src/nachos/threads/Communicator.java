@@ -18,18 +18,18 @@ public class Communicator {
 		listener=new Condition2(lock);
 		speaker=new Condition2(lock);
 		waitingReturn=new Condition2(lock);
-		
-		
+
+
 	}
 
 	/**
 	 * Wait for a thread to listen through this communicator, and then transfer
 	 * <i>word</i> to the listener.
-	 * 
+	 *
 	 * <p>
 	 * Does not return until this thread is paired up with a listening thread.
 	 * Exactly one listener should receive <i>word</i>.
-	 * 
+	 *
 	 * @param word the integer to transfer.
 	 */
 	public void speak(int word) {
@@ -51,17 +51,17 @@ public class Communicator {
 			speaker.wake();
 		}
 		lock.release();
-		return;		
+		return;
 	}
 
 	/**
 	 * Wait for a thread to speak through this communicator, and then return the
 	 * <i>word</i> that thread passed to <tt>speak()</tt>.
-	 * 
+	 *
 	 * @return the integer transferred.
 	 */
 	public int listen() {
-        lock.acquire();
+		lock.acquire();
 		while(receivingListener!=0){
 			waitingListener++;
 			listener.sleep();
@@ -81,7 +81,7 @@ public class Communicator {
 		lock.release();
 		return word;
 	}
-	
+
 	private int waitingSpeaker=0;
 	private int sendingSpeaker=0;
 	private int waitingListener=0;

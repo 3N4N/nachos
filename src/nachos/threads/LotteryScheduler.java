@@ -11,18 +11,18 @@ import java.util.Iterator;
 
 /**
  * A scheduler that chooses threads using a lottery.
- * 
+ *
  * <p>
  * A lottery scheduler associates a number of tickets with each thread. When a
  * thread needs to be dequeued, a random lottery is held, among all the tickets
  * of all the threads waiting to be dequeued. The thread that holds the winning
  * ticket is chosen.
- * 
+ *
  * <p>
  * Note that a lottery scheduler must be able to handle a lot of tickets
  * (sometimes billions), so it is not acceptable to maintain state for every
  * ticket.
- * 
+ *
  * <p>
  * A lottery scheduler must partially solve the priority inversion problem; in
  * particular, tickets must be transferred through locks, and through joins.
@@ -35,7 +35,7 @@ public class LotteryScheduler extends PriorityScheduler  {
 	 */
 	public LotteryScheduler() {
 		super();
-		
+
 
 	}
 	public static void selfTest() {
@@ -104,7 +104,7 @@ public class LotteryScheduler extends PriorityScheduler  {
 			if (newQueue.nextThread() == thread10)
 				tot10 += 1;
 			else
-				tot20+=1;	
+				tot20+=1;
 		}
 
 		System.out.println("thread1 Total = " + tot10);
@@ -125,7 +125,7 @@ public class LotteryScheduler extends PriorityScheduler  {
 
 	/**
 	 * Allocate a new lottery thread queue.
-	 * 
+	 *
 	 * @param transferPriority <tt>true</tt> if this queue should transfer
 	 * tickets from waiting threads to the owning thread.
 	 * @return a new lottery thread queue.
@@ -135,21 +135,21 @@ public class LotteryScheduler extends PriorityScheduler  {
 		// implement me
 		return null;
 	}
-*/	
+*/
 
 	/**
 	 * Allocate a new priority thread queue.
-	 * 
+	 *
 	 * @param transferPriority <tt>true</tt> if this queue should transfer
 	 * priority from waiting threads to the owning thread.
 	 * @return a new priority thread queue.
 	 */
 
 
-    public ThreadQueue newThreadQueue(boolean transferPriority) {
-        return new LotteryQueue(transferPriority);
-    }
-        
+	public ThreadQueue newThreadQueue(boolean transferPriority) {
+		return new LotteryQueue(transferPriority);
+	}
+
 	/**
 	 * The default priority for a new thread. Do not change this value.
 	 */
@@ -167,7 +167,7 @@ public class LotteryScheduler extends PriorityScheduler  {
 
 	/**
 	 * Return the scheduling state of the specified thread.
-	 * 
+	 *
 	 * @param thread the thread whose scheduling state to return.
 	 * @return the scheduling state of the specified thread.
 	 */
@@ -185,14 +185,14 @@ public class LotteryScheduler extends PriorityScheduler  {
 			thread.schedulingState = new LotteryThreadState(thread);
 
 		return (LotteryThreadState) thread.schedulingState;
-		
+
 	}
 
 	/**
 	 * A <tt>ThreadQueue</tt> that sorts threads by priority.
 	 */
 	protected class LotteryQueue extends ThreadQueue {
-		
+
 		LotteryQueue(boolean transferPriority) {
 			this.transferPriority = transferPriority;
 		}
@@ -212,25 +212,25 @@ public class LotteryScheduler extends PriorityScheduler  {
 			Lib.assertTrue(Machine.interrupt().disabled());
 			// implement me
 			int totaltickets = 0;
-			
+
 			Iterator<ThreadState> queue = LotteryPQueue.iterator();
 			while ( queue.hasNext())
 			{
 				int tickes = queue.next().effectivePriority;
 				totaltickets += tickes;
 			}
-			
+
 			Random generator = new Random();
 			Integer ticketChoice = 0;
-			
+
 			if(totaltickets != 0)
 			{
-				 ticketChoice = generator.nextInt(totaltickets);
+				ticketChoice = generator.nextInt(totaltickets);
 			}
-		
-			
+
+
 			int TickSubSum = 0;
-			
+
 			KThread thread =null;
 			for(ThreadState ThState : LotteryPQueue)
 			{
@@ -248,7 +248,7 @@ public class LotteryScheduler extends PriorityScheduler  {
 		/**
 		 * Return the next thread that <tt>nextThread()</tt> would return,
 		 * without modifying the state of this queue.
-		 * 
+		 *
 		 * @return the next thread that <tt>nextThread()</tt> would return.
 		 */
 		protected ThreadState pickNextThread() {
@@ -268,38 +268,38 @@ public class LotteryScheduler extends PriorityScheduler  {
 		 * threads to the owning thread.
 		 */
 		public boolean transferPriority;
-		
+
 		protected LotteryThreadState LotteryresourceHolder=null;
-		
+
 		protected LinkedList<ThreadState> LotteryPQueue = new LinkedList<ThreadState>();
-		
-		
+
+
 	}
 
 	/**
 	 * The scheduling state of a thread. This should include the thread's
 	 * priority, its effective priority, any objects it owns, and the queue it's
 	 * waiting for, if any.
-	 * 
+	 *
 	 * @see nachos.threads.KThread#schedulingState
 	 */
 
 	//protected class ThreadState implements Comparable<ThreadState>{
 	protected class LotteryThreadState extends ThreadState{
-	/**
+		/**
 		 * Allocate a new <tt>ThreadState</tt> object and associate it with the
 		 * specified thread.
-		 * 
+		 *
 		 * @param thread the thread this state belongs to.
 		 */
-        public LotteryThreadState(KThread thread) {
-            this.thread = thread;
+		public LotteryThreadState(KThread thread) {
+			this.thread = thread;
 
-    }
+		}
 
 		/**
 		 * Return the priority of the associated thread.
-		 * 
+		 *
 		 * @return the priority of the associated thread.
 		 */
 		public int getPriority() {
@@ -308,17 +308,17 @@ public class LotteryScheduler extends PriorityScheduler  {
 
 		/**
 		 * Return the effective priority of the associated thread.
-		 * 
+		 *
 		 * @return the effective priority of the associated thread.
 		 */
 		public int getEffectivePriority() {
-			
+
 			return this.effectivePriority;
 		}
-	
+
 		/**
 		 * Set the priority of the associated thread to the specified value.
-		 * 
+		 *
 		 * @param priority the new priority.
 		 */
 		public void setPriority(int priority) {
@@ -329,15 +329,15 @@ public class LotteryScheduler extends PriorityScheduler  {
 			this.effectivePriority = this.priority;
 			// implement me
 			LotteryCorrectPriority();
-			
+
 		}
-		
+
 		private void LotteryCorrectPriority() {
 			if(this.LotteryHoldingQueues !=null)
 			{
 				if(!this.LotteryHoldingQueues.isEmpty())
 				{
-					Iterator<LotteryQueue> TPQueueNT =this.LotteryHoldingQueues.iterator();			
+					Iterator<LotteryQueue> TPQueueNT =this.LotteryHoldingQueues.iterator();
 					while(TPQueueNT.hasNext())
 					{
 						LotteryThreadState HoldResource=TPQueueNT.next().LotteryresourceHolder;
@@ -348,7 +348,7 @@ public class LotteryScheduler extends PriorityScheduler  {
 							SumPriority += HoldResource.LotteryWaitingTSQueue.get(i).effectivePriority;
 						}
 						HoldResource.effectivePriority = HoldResource.priority + SumPriority;
-						
+
 						HoldResource.LotteryCorrectPriority();
 					}
 				}
@@ -363,10 +363,10 @@ public class LotteryScheduler extends PriorityScheduler  {
 		 * The associated thread is therefore waiting for access to the resource
 		 * guarded by <tt>waitQueue</tt>. This method is only called if the
 		 * associated thread cannot immediately obtain access.
-		 * 
+		 *
 		 * @param waitQueue the queue that the associated thread is now waiting
 		 * on.
-		 * 
+		 *
 		 * @see nachos.threads.ThreadQueue#waitForAccess
 		 */
 		public void waitForAccess(LotteryQueue waitQueue) {
@@ -374,7 +374,7 @@ public class LotteryScheduler extends PriorityScheduler  {
 
 			this.age = Machine.timer().getTime();
 			waitQueue.LotteryPQueue.add(this);
-			
+
 			if(waitQueue.transferPriority==true)
 			{
 				LotteryHoldingQueues.add(waitQueue);
@@ -384,7 +384,7 @@ public class LotteryScheduler extends PriorityScheduler  {
 					waitQueue.LotteryresourceHolder.effectivePriority +=this.effectivePriority;
 					waitQueue.LotteryresourceHolder.LotteryCorrectPriority();
 				}
-				
+
 			}
 
 		}
@@ -395,7 +395,7 @@ public class LotteryScheduler extends PriorityScheduler  {
 		 * <tt>acquire(thread)</tt> being invoked on <tt>waitQueue</tt> (where
 		 * <tt>thread</tt> is the associated thread), or as a result of
 		 * <tt>nextThread()</tt> being invoked on <tt>waitQueue</tt>.
-		 * 
+		 *
 		 * @see nachos.threads.ThreadQueue#acquire
 		 * @see nachos.threads.ThreadQueue#nextThread
 		 */
@@ -404,8 +404,8 @@ public class LotteryScheduler extends PriorityScheduler  {
 			if(waitQueue.transferPriority)
 			{
 				waitQueue.LotteryresourceHolder = this;
-			}		
-			
+			}
+
 		}
 
 		/** The thread with which this object is associated. */
@@ -414,14 +414,14 @@ public class LotteryScheduler extends PriorityScheduler  {
 		protected long age = Machine.timer().getTime();
 		/** The priority of the associated thread. */
 		protected int priority = priorityDefault;
-		
+
 		protected int effectivePriority =priorityDefault;
-		
+
 		protected LinkedList<LotteryQueue> LotteryHoldingQueues = new LinkedList<LotteryQueue>();
 
-		protected LinkedList<LotteryThreadState> LotteryWaitingTSQueue = new LinkedList<LotteryThreadState>();		
-	
-		
+		protected LinkedList<LotteryThreadState> LotteryWaitingTSQueue = new LinkedList<LotteryThreadState>();
+
+
 	}
-	
+
 }

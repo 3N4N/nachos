@@ -16,7 +16,7 @@ import java.io.IOException;
 public class StubFileSystem implements FileSystem {
 	/**
 	 * Allocate a new stub file system.
-	 * 
+	 *
 	 * @param privilege encapsulates privileged access to the Nachos machine.
 	 * @param directory the root directory of the stub file system.
 	 */

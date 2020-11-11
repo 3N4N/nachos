@@ -5,14 +5,14 @@ import nachos.machine.*;
 /**
  * A <tt>Lock</tt> is a synchronization primitive that has two states,
  * <i>busy</i> and <i>free</i>. There are only two operations allowed on a lock:
- * 
+ *
  * <ul>
  * <li><tt>acquire()</tt>: atomically wait until the lock is <i>free</i> and
  * then set it to <i>busy</i>.
  * <li><tt>release()</tt>: set the lock to be <i>free</i>, waking up one waiting
  * thread if possible.
  * </ul>
- * 
+ *
  * <p>
  * Also, only the thread that acquired a lock may release it. As with
  * semaphores, the API does not allow you to read the lock state (because the
@@ -65,7 +65,7 @@ public class Lock {
 
 	/**
 	 * Test if the current thread holds this lock.
-	 * 
+	 *
 	 * @return true if the current thread holds this lock.
 	 */
 	public boolean isHeldByCurrentThread() {

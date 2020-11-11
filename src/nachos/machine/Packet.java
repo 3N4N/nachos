@@ -4,13 +4,13 @@ package nachos.machine;
 
 /**
  * A link-layer packet.
- * 
+ *
  * @see nachos.machine.NetworkLink
  */
 public class Packet {
 	/**
 	 * Allocate a new packet to be sent, using the specified parameters.
-	 * 
+	 *
 	 * @param dstLink the destination link address.
 	 * @param srcLink the source link address.
 	 * @param contents the contents of the packet.
@@ -42,7 +42,7 @@ public class Packet {
 	/**
 	 * Allocate a new packet using the specified array of bytes received from
 	 * the network.
-	 * 
+	 *
 	 * @param packetBytes the bytes making up this packet.
 	 */
 	public Packet(byte[] packetBytes) throws MalformedPacketException {
@@ -80,7 +80,7 @@ public class Packet {
 	/**
 	 * The number of bytes in a link-layer packet header. The header is
 	 * formatted as follows:
-	 * 
+	 *
 	 * <table>
 	 * <tr>
 	 * <td>offset</td>

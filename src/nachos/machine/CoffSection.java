@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class CoffSection {
 	/**
 	 * Allocate a new COFF section with the specified parameters.
-	 * 
+	 *
 	 * @param coff the COFF object to which this section belongs.
 	 * @param name the COFF name of this section.
 	 * @param executable <tt>true</tt> if this section contains code.
@@ -22,7 +22,7 @@ public class CoffSection {
 	 * @param firstVPN the first virtual page number used by this.
 	 */
 	protected CoffSection(Coff coff, String name, boolean executable,
-			boolean readOnly, int numPages, int firstVPN) {
+						  boolean readOnly, int numPages, int firstVPN) {
 		this.coff = coff;
 		this.name = name;
 		this.executable = executable;
@@ -38,10 +38,10 @@ public class CoffSection {
 
 	/**
 	 * Load a COFF section from an executable.
-	 * 
+	 *
 	 * @param file the file containing the executable.
 	 * @param headerOffset the offset of the section header in the executable.
-	 * 
+	 *
 	 * @exception EOFException if an error occurs.
 	 */
 	public CoffSection(OpenFile file, Coff coff, int headerOffset)
@@ -71,29 +71,29 @@ public class CoffSection {
 		}
 
 		switch (flags & 0x0FFF) {
-		case 0x0020:
-			executable = true;
-			readOnly = true;
-			initialized = true;
-			break;
-		case 0x0040:
-			executable = false;
-			readOnly = false;
-			initialized = true;
-			break;
-		case 0x0080:
-			executable = false;
-			readOnly = false;
-			initialized = false;
-			break;
-		case 0x0100:
-			executable = false;
-			readOnly = true;
-			initialized = true;
-			break;
-		default:
-			Lib.debug(dbgCoffSection, "\tinvalid section flags: " + flags);
-			throw new EOFException();
+			case 0x0020:
+				executable = true;
+				readOnly = true;
+				initialized = true;
+				break;
+			case 0x0040:
+				executable = false;
+				readOnly = false;
+				initialized = true;
+				break;
+			case 0x0080:
+				executable = false;
+				readOnly = false;
+				initialized = false;
+				break;
+			case 0x0100:
+				executable = false;
+				readOnly = true;
+				initialized = true;
+				break;
+			default:
+				Lib.debug(dbgCoffSection, "\tinvalid section flags: " + flags);
+				throw new EOFException();
 		}
 
 		if (vaddr % Processor.pageSize != 0 || size < 0 || initialized
@@ -110,7 +110,7 @@ public class CoffSection {
 
 	/**
 	 * Return the COFF object used to load this executable instance.
-	 * 
+	 *
 	 * @return the COFF object corresponding to this section.
 	 */
 	public Coff getCoff() {
@@ -119,7 +119,7 @@ public class CoffSection {
 
 	/**
 	 * Return the name of this section.
-	 * 
+	 *
 	 * @return the name of this section.
 	 */
 	public String getName() {
@@ -128,7 +128,7 @@ public class CoffSection {
 
 	/**
 	 * Test whether this section is read-only.
-	 * 
+	 *
 	 * @return <tt>true</tt> if this section should never be written.
 	 */
 	public boolean isReadOnly() {
@@ -139,7 +139,7 @@ public class CoffSection {
 	 * Test whether this section is initialized. Loading a page from an
 	 * initialized section requires a disk access, while loading a page from an
 	 * uninitialized section requires only zero-filling the page.
-	 * 
+	 *
 	 * @return <tt>true</tt> if this section contains initialized data in the
 	 * executable.
 	 */
@@ -149,7 +149,7 @@ public class CoffSection {
 
 	/**
 	 * Return the length of this section in pages.
-	 * 
+	 *
 	 * @return the number of pages in this section.
 	 */
 	public int getLength() {
@@ -158,7 +158,7 @@ public class CoffSection {
 
 	/**
 	 * Return the first virtual page number used by this section.
-	 * 
+	 *
 	 * @return the first virtual page number used by this section.
 	 */
 	public int getFirstVPN() {
@@ -167,7 +167,7 @@ public class CoffSection {
 
 	/**
 	 * Load a page from this segment into physical memory.
-	 * 
+	 *
 	 * @param spn the page number within this segment.
 	 * @param ppn the physical page to load into.
 	 */

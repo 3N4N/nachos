@@ -25,7 +25,7 @@ public final class ElevatorBank implements Runnable {
 
 	/**
 	 * Allocate a new elevator bank.
-	 * 
+	 *
 	 * @param privilege encapsulates privileged access to the Nachos machine.
 	 */
 	public ElevatorBank(Privilege privilege) {
@@ -41,13 +41,13 @@ public final class ElevatorBank implements Runnable {
 	 * the specified number of floors. The software elevator controller must
 	 * also be specified. This elevator must not already be running a
 	 * simulation.
-	 * 
+	 *
 	 * @param numElevators the number of elevators in the bank.
 	 * @param numFloors the number of floors in the bank.
 	 * @param controller the elevator controller.
 	 */
 	public void init(int numElevators, int numFloors,
-			ElevatorControllerInterface controller) {
+					 ElevatorControllerInterface controller) {
 		Lib.assertTrue(!simulationStarted);
 
 		this.numElevators = numElevators;
@@ -69,7 +69,7 @@ public final class ElevatorBank implements Runnable {
 	/**
 	 * Add a rider to the simulation. This method must not be called after
 	 * <tt>run()</tt> is called.
-	 * 
+	 *
 	 * @param rider the rider to add.
 	 * @param floor the floor the rider will start on.
 	 * @param stops the array to pass to the rider's <tt>initialize()</tt>

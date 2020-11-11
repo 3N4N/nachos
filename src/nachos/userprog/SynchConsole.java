@@ -11,7 +11,7 @@ import nachos.userprog.*;
 public class SynchConsole {
 	/**
 	 * Allocate a new <tt>SynchConsole</tt>.
-	 * 
+	 *
 	 * @param console the underlying serial console to use.
 	 */
 	public SynchConsole(SerialConsole console) {
@@ -34,7 +34,7 @@ public class SynchConsole {
 	 * Return the next unsigned byte received (in the range <tt>0</tt> through
 	 * <tt>255</tt>). If a byte has not arrived at, blocks until a byte arrives,
 	 * or returns immediately, depending on the value of <i>block</i>.
-	 * 
+	 *
 	 * @param block <tt>true</tt> if <tt>readByte()</tt> should wait for a byte
 	 * if none is available.
 	 * @return the next byte read, or -1 if <tt>block</tt> was <tt>false</tt>
@@ -63,7 +63,7 @@ public class SynchConsole {
 
 	/**
 	 * Return an <tt>OpenFile</tt> that can be used to read this as a file.
-	 * 
+	 *
 	 * @return a file that can read this console.
 	 */
 	public OpenFile openForReading() {
@@ -77,7 +77,7 @@ public class SynchConsole {
 
 	/**
 	 * Send a byte. Blocks until the send is complete.
-	 * 
+	 *
 	 * @param value the byte to be sent (the upper 24 bits are ignored).
 	 */
 	public void writeByte(int value) {
@@ -89,7 +89,7 @@ public class SynchConsole {
 
 	/**
 	 * Return an <tt>OpenFile</tt> that can be used to write this as a file.
-	 * 
+	 *
 	 * @return a file that can write this console.
 	 */
 	public OpenFile openForWriting() {

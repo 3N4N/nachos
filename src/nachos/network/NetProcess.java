@@ -21,7 +21,7 @@ public class NetProcess extends VMProcess {
 	/**
 	 * Handle a syscall exception. Called by <tt>handleException()</tt>. The
 	 * <i>syscall</i> argument identifies which syscall the user executed:
-	 * 
+	 *
 	 * <table>
 	 * <tr>
 	 * <td>syscall#</td>
@@ -36,7 +36,7 @@ public class NetProcess extends VMProcess {
 	 * <td><tt>int  accept(int port);</tt></td>
 	 * </tr>
 	 * </table>
-	 * 
+	 *
 	 * @param syscall the syscall number.
 	 * @param a0 the first syscall argument.
 	 * @param a1 the second syscall argument.
@@ -46,8 +46,8 @@ public class NetProcess extends VMProcess {
 	 */
 	public int handleSyscall(int syscall, int a0, int a1, int a2, int a3) {
 		switch (syscall) {
-		default:
-			return super.handleSyscall(syscall, a0, a1, a2, a3);
+			default:
+				return super.handleSyscall(syscall, a0, a1, a2, a3);
 		}
 	}
 }

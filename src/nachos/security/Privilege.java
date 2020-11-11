@@ -13,7 +13,7 @@ import java.security.PrivilegedActionException;
 
 /**
  * A capability that allows privileged access to the Nachos machine.
- * 
+ *
  * <p>
  * Some privileged operations are guarded by the Nachos security manager:
  * <ol>
@@ -22,7 +22,7 @@ import java.security.PrivilegedActionException;
  * <li>exit with specific status code
  * </ol>
  * These operations can only be performed through <tt>doPrivileged()</tt>.
- * 
+ *
  * <p>
  * Some privileged operations require a capability:
  * <ol>
@@ -34,7 +34,7 @@ import java.security.PrivilegedActionException;
  * <li>approving TCB operations
  * </ol>
  * These operations can be directly performed using a <tt>Privilege</tt> object.
- * 
+ *
  * <p>
  * The Nachos kernel should <i>never</i> be able to directly perform any of
  * these privileged operations. If you have discovered a loophole somewhere,
@@ -51,14 +51,14 @@ public abstract class Privilege {
 
 	/**
 	 * Perform the specified action with privilege.
-	 * 
+	 *
 	 * @param action the action to perform.
 	 */
 	public abstract void doPrivileged(Runnable action);
 
 	/**
 	 * Perform the specified <tt>PrivilegedAction</tt> with privilege.
-	 * 
+	 *
 	 * @param action the action to perform.
 	 * @return the return value of the action.
 	 */
@@ -66,7 +66,7 @@ public abstract class Privilege {
 
 	/**
 	 * Perform the specified <tt>PrivilegedExceptionAction</tt> with privilege.
-	 * 
+	 *
 	 * @param action the action to perform.
 	 * @return the return value of the action.
 	 */
@@ -75,7 +75,7 @@ public abstract class Privilege {
 
 	/**
 	 * Exit Nachos with the specified status.
-	 * 
+	 *
 	 * @param exitStatus the exit status of the Nachos process.
 	 */
 	public abstract void exit(int exitStatus);
@@ -83,7 +83,7 @@ public abstract class Privilege {
 	/**
 	 * Add an <tt>exit()</tt> notification handler. The handler will be invoked
 	 * by exit().
-	 * 
+	 *
 	 * @param handler the notification handler.
 	 */
 	public void addExitNotificationHandler(Runnable handler) {
@@ -129,7 +129,7 @@ public abstract class Privilege {
 	public interface MachinePrivilege {
 		/**
 		 * Install a hardware console.
-		 * 
+		 *
 		 * @param console the new hardware console.
 		 */
 		public void setConsole(SerialConsole console);
@@ -142,7 +142,7 @@ public abstract class Privilege {
 	public interface InterruptPrivilege {
 		/**
 		 * Schedule an interrupt to occur at some time in the future.
-		 * 
+		 *
 		 * @param when the number of ticks until the interrupt should occur.
 		 * @param type a name for the type of interrupt being scheduled.
 		 * @param handler the interrupt handler to call.
@@ -151,7 +151,7 @@ public abstract class Privilege {
 
 		/**
 		 * Advance the simulated time.
-		 * 
+		 *
 		 * @param inKernelMode <tt>true</tt> if the current thread is running
 		 * kernel code, <tt>false</tt> if the current thread is running MIPS
 		 * user code.
@@ -179,7 +179,7 @@ public abstract class Privilege {
 		 * Associate the current TCB with the specified <tt>KThread</tt>.
 		 * <tt>AutoGrader.runningThread()</tt> <i>must</i> call this method
 		 * before returning.
-		 * 
+		 *
 		 * @param thread the current thread.
 		 */
 		public void associateThread(KThread thread);
@@ -187,7 +187,7 @@ public abstract class Privilege {
 		/**
 		 * Authorize the TCB associated with the specified thread to be
 		 * destroyed.
-		 * 
+		 *
 		 * @param thread the thread whose TCB is about to be destroyed.
 		 */
 		public void authorizeDestroy(KThread thread);

@@ -15,7 +15,7 @@ import java.net.SocketException;
  * A full-duplex network link. Provides ordered, unreliable delivery of
  * limited-size packets to other machines on the network. Packets are guaranteed
  * to be uncorrupted as well.
- * 
+ *
  * <p>
  * Recall the general layering of network protocols:
  * <ul>
@@ -24,18 +24,18 @@ import java.net.SocketException;
  * <li>Link
  * <li>Physical
  * </ul>
- * 
+ *
  * <p>
  * The physical layer provides a bit stream interface to the link layer. This
  * layer is very hardware-dependent.
- * 
+ *
  * <p>
  * The link layer uses the physical layer to provide a packet interface to the
  * network layer. The link layer generally provides unreliable delivery of
  * limited-size packets, but guarantees that packets will not arrive out of
  * order. Some links protect against packet corruption as well. The ethernet
  * protocol is an example of a link layer.
- * 
+ *
  * <p>
  * The network layer exists to connect multiple networks together into an
  * internet. The network layer provides globally unique addresses. Routers
@@ -44,13 +44,13 @@ import java.net.SocketException;
  * packets to any machine on the same internet. The most commonly used network
  * layer protocol is IP (Internet Protocol), which is used to connect the
  * Internet.
- * 
+ *
  * <p>
  * The session/transport layer provides a byte-stream interface to the
  * application. This means that the transport layer must deliver uncorrupted
  * bytes to the application, in the same order they were sent. Byte-streams must
  * be connected and disconnected, and exist between ports, not machines.
- * 
+ *
  * <p>
  * This class provides a link layer abstraction. Since we do not allow different
  * Nachos networks to communicate with one another, there is no need for a
@@ -61,12 +61,12 @@ import java.net.SocketException;
 public class NetworkLink {
 	/**
 	 * Allocate a new network link.
-	 * 
+	 *
 	 * <p>
 	 * <tt>nachos.conf</tt> specifies the reliability of the network. The
 	 * reliability, between 0 and 1, is the probability that any particular
 	 * packet will not get dropped by the network.
-	 * 
+	 *
 	 * @param privilege encapsulates privileged access to the Nachos machine.
 	 */
 	public NetworkLink(Privilege privilege) {
@@ -130,7 +130,7 @@ public class NetworkLink {
 
 	/**
 	 * Returns the address of this network link.
-	 * 
+	 *
 	 * @return the address of this network link.
 	 */
 	public int getLinkAddress() {
@@ -139,23 +139,23 @@ public class NetworkLink {
 
 	/**
 	 * Set this link's receive and send interrupt handlers.
-	 * 
+	 *
 	 * <p>
 	 * The receive interrupt handler is called every time a packet arrives and
 	 * can be read using <tt>receive()</tt>.
-	 * 
+	 *
 	 * <p>
 	 * The send interrupt handler is called every time a packet sent with
 	 * <tt>send()</tt> is finished being sent. This means that another packet
 	 * can be sent.
-	 * 
+	 *
 	 * @param receiveInterruptHandler the callback to call when a packet
 	 * arrives.
 	 * @param sendInterruptHandler the callback to call when another packet can
 	 * be sent.
 	 */
 	public void setInterruptHandlers(Runnable receiveInterruptHandler,
-			Runnable sendInterruptHandler) {
+									 Runnable sendInterruptHandler) {
 		this.receiveInterruptHandler = receiveInterruptHandler;
 		this.sendInterruptHandler = sendInterruptHandler;
 	}
@@ -194,7 +194,7 @@ public class NetworkLink {
 
 	/**
 	 * Return the next packet received.
-	 * 
+	 *
 	 * @return the next packet received, or <tt>null</tt> if no packet is
 	 * available.
 	 */
@@ -287,7 +287,7 @@ public class NetworkLink {
 	/**
 	 * Send another packet. If a packet is already being sent, the result is not
 	 * defined.
-	 * 
+	 *
 	 * @param pkt the packet to send.
 	 */
 	public void send(Packet pkt) {

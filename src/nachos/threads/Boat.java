@@ -24,12 +24,12 @@ public class Boat
 		// Instantiate global variables here
 		int tc = children;  //total children
 		int ta = adults;    //total adults
-		moloChildCount = 0;  
-		moloAdultCount = 0;   
-		oahuChildCount = 0; 
-		oahuAdultCount = 0;	
+		moloChildCount = 0;
+		moloAdultCount = 0;
+		oahuChildCount = 0;
+		oahuAdultCount = 0;
 		lastoahuChildCount = 0;
-		lastoahuAdultCount = 0;	
+		lastoahuAdultCount = 0;
 		lastmoloChildCount = 0;
 		lastmoloChildCount = 0;
 		myLock = new Lock(); //lock
@@ -49,7 +49,7 @@ public class Boat
 			};
 			KThread t = new KThread(r);
 			t.setName("Adult Thread on Oahu");
-			t.fork(); 	
+			t.fork();
 		}
 
 		for(int j=0; j<children; j++){
@@ -60,7 +60,7 @@ public class Boat
 			};
 			KThread t = new KThread(r);
 			t.setName("Child Thread on Oahu");
-			t.fork(); 
+			t.fork();
 		}
 
 		complete = false;
@@ -70,49 +70,49 @@ public class Boat
 		myLock.acquire();
 		while(!done(tc, ta))
 		{ problemOfBoat.sleep();}
-		
-		complete = true; 
+
+		complete = true;
 		oahuWaitChildren.wakeAll();
 		moloWaitChildren.wakeAll();
 		oahuWaitAdult.wakeAll();
 		myLock.release();
 	}
-	
+
 	static void ChildItinerary() //children thread
 	{
 		myLock.acquire();
 		oahuChildCount++;
 		while (!complete){
-			while (situationChild() == 0){      
+			while (situationChild() == 0){
 				if (positionOfBoat.equals("Oahu"))
 				{
-					oahuWaitChildren.wake(); 
+					oahuWaitChildren.wake();
 					moloWaitChildren.sleep();
 				}
 				else
 				{
-					moloWaitChildren.wake(); 
+					moloWaitChildren.wake();
 					oahuWaitChildren.sleep();
 				}
 				oahuWaitAdult.wake(); //try waking up adult
-			}	
+			}
 			if (!complete){
 				goChild(positionOfBoat); 	//update
-				
+
 				if (mayDone())
-				{    
+				{
 					problemOfBoat.wake();
-					oahuWaitAdult.wake(); 
+					oahuWaitAdult.wake();
 					moloWaitChildren.sleep();
 				}
 				else
 				{
 					if (boatTring)
 					{
-						oahuWaitChildren.wake();						
+						oahuWaitChildren.wake();
 						isOnBoat = true;
 						boatTring = false;
-						boatWait.sleep();			
+						boatWait.sleep();
 					}
 					else
 					{
@@ -129,9 +129,9 @@ public class Boat
 								boatWait.wake();
 								isOnBoat = false;
 							}
-							moloWaitChildren.wake();	
+							moloWaitChildren.wake();
 							oahuWaitAdult.wake();
-							moloWaitChildren.sleep(); 
+							moloWaitChildren.sleep();
 						}
 					}
 				}
@@ -139,20 +139,20 @@ public class Boat
 		}
 		myLock.release();
 	}
-	
-	
+
+
 	static void AdultItinerary()
 	{
 		myLock.acquire();
-		oahuAdultCount++; 		
+		oahuAdultCount++;
 		while (situationAdult() == 0){
 			if ( positionOfBoat.equals("Oahu"))
 				oahuWaitChildren.wake();
 			else
 				moloWaitChildren.wake();
-			oahuWaitAdult.sleep();  
+			oahuWaitAdult.sleep();
 		}
-		goAdult(positionOfBoat); 	 
+		goAdult(positionOfBoat);
 		moloWaitChildren.wake(); 	//try waking up child on Molokai
 		myLock.release();
 	}
@@ -163,30 +163,30 @@ public class Boat
 		else
 			return false;
 	}
-	
+
 	public static boolean done(int tc, int ta){
 		if (moloAdultCount == ta && moloChildCount == tc && positionOfBoat.equals("Molokai"))
 			return true;
 		else
 			return false;
 	}
-	
+
 	public static void goChild(String position){
 		if (position.equals("Oahu")){
 			if (!waitedPerson){ //if false, then nobody wait
 				oahuChildCount--;
 				lastoahuAdultCount = oahuAdultCount;
 				lastoahuChildCount = oahuChildCount;
-				
+
 				bg.ChildRowToMolokai();		// pilot is child
-			
+
 				KThread.currentThread().setName("Child Thread on Boat");
-				
+
 				boatTring = true;
 				waitedPerson = true;
 				childrenWait.add(KThread.currentThread());
-			}else{ 
-				oahuChildCount--; 	
+			}else{
+				oahuChildCount--;
 				lastoahuChildCount = oahuChildCount;
 				lastoahuAdultCount = oahuAdultCount;
 				bg.ChildRideToMolokai(); 	// passenger child to Molo		
@@ -197,7 +197,7 @@ public class Boat
 				moloChildCount = moloChildCount + 2; //update for both children
 				waitedPerson = false;
 			}
-		}else{ 
+		}else{
 			moloChildCount--;
 			lastmoloChildCount = moloChildCount;
 			lastmoloAdultCount = moloAdultCount;
@@ -217,7 +217,7 @@ public class Boat
 
 			bg.AdultRowToMolokai();
 			moloAdultCount++;
-			positionOfBoat = "Molokai"; 
+			positionOfBoat = "Molokai";
 			KThread.currentThread().setName("Adult Thread on Molokai");
 
 		}
@@ -231,24 +231,24 @@ public class Boat
 			else
 				return 0;//wait
 		}else{
-			if( KThread.currentThread().getName().equals("Child Thread on Molokai")) 
+			if( KThread.currentThread().getName().equals("Child Thread on Molokai"))
 				return 1;
 			else
-				return 0; 
+				return 0;
 		}
 	}
 
 	public static int situationAdult(){
 		if( positionOfBoat.equals("Oahu") ){
-			if( KThread.currentThread().getName().equals("Adult Thread on Oahu") && !waitedPerson && lastmoloChildCount > 0 )			
+			if( KThread.currentThread().getName().equals("Adult Thread on Oahu") && !waitedPerson && lastmoloChildCount > 0 )
 				return 1; //go
 			else
 				return 0;	//wait
 		}else
 			return 0; //wait
 	}
-	
-	
+
+
 
 	static void SampleItinerary()
 	{
@@ -259,21 +259,21 @@ public class Boat
 		bg.ChildRideToMolokai();
 	}
 
-	
+
 	private static Condition problemOfBoat;
 	private static Lock myLock;
-	private static String positionOfBoat; 
-	private static int lastmoloChildCount; 
+	private static String positionOfBoat;
+	private static int lastmoloChildCount;
 	private static int lastoahuAdultCount;
 	private static int lastoahuChildCount;
-	private static int oahuChildCount; 
-	private static int oahuAdultCount;   
+	private static int oahuChildCount;
+	private static int oahuAdultCount;
 	private static int moloChildCount;
 	private static int moloAdultCount;
 	private static LinkedList<KThread> childrenWait;
 	private static boolean complete;
-	private static boolean waitedPerson; 
-	private static int lastmoloAdultCount; 
+	private static boolean waitedPerson;
+	private static int lastmoloAdultCount;
 	private static Condition oahuWaitAdult;
 	private static Condition oahuWaitChildren;
 	private static Condition moloWaitChildren;

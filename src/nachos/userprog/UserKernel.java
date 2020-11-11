@@ -67,7 +67,7 @@ public class UserKernel extends ThreadedKernel {
 
     /**
      * Returns the current process.
-     * 
+     *
      * @return the current process, or <tt>null</tt> if no process is current.
      */
     public static UserProcess currentProcess() {
@@ -80,7 +80,7 @@ public class UserKernel extends ThreadedKernel {
     /**
      * The exception handler. This handler is called by the processor whenever a
      * user instruction causes a processor exception.
-     * 
+     *
      * <p>
      * When the exception handler is invoked, interrupts are enabled, and the
      * processor's cause register contains an integer identifying the cause of
@@ -102,7 +102,7 @@ public class UserKernel extends ThreadedKernel {
      * Start running user programs, by creating a process and running a shell
      * program in it. The name of the shell program it must run is returned by
      * <tt>Machine.getShellProgramName()</tt>.
-     * 
+     *
      * @see nachos.machine.Machine#getShellProgramName
      */
     public void run() {

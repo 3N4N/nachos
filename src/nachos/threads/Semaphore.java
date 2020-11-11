@@ -5,14 +5,14 @@ import nachos.machine.*;
 /**
  * A <tt>Semaphore</tt> is a synchronization primitive with an unsigned value. A
  * semaphore has only two operations:
- * 
+ *
  * <ul>
  * <li><tt>P()</tt>: waits until the semaphore's value is greater than zero,
  * then decrements it.
  * <li><tt>V()</tt>: increments the semaphore's value, and wakes up one thread
  * waiting in <tt>P()</tt> if possible.
  * </ul>
- * 
+ *
  * <p>
  * Note that this API does not allow a thread to read the value of the semaphore
  * directly. Even if you did read the value, the only thing you would know is
@@ -24,7 +24,7 @@ import nachos.machine.*;
 public class Semaphore {
 	/**
 	 * Allocate a new semaphore.
-	 * 
+	 *
 	 * @param initialValue the initial value of this semaphore.
 	 */
 	public Semaphore(int initialValue) {

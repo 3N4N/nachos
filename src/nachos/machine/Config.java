@@ -15,7 +15,7 @@ public final class Config {
 	/**
 	 * Load configuration information from the specified file. Must be called
 	 * before the Nachos security manager is installed.
-	 * 
+	 *
 	 * @param fileName the name of the file containing the configuration to use.
 	 */
 	public static void load(String fileName) {
@@ -99,7 +99,7 @@ public final class Config {
 
 	/**
 	 * Get the value of a key in <tt>nachos.conf</tt>.
-	 * 
+	 *
 	 * @param key the key to look up.
 	 * @return the value of the specified key, or <tt>null</tt> if it is not
 	 * present.
@@ -111,7 +111,7 @@ public final class Config {
 	/**
 	 * Get the value of a key in <tt>nachos.conf</tt>, returning the specified
 	 * default if the key does not exist.
-	 * 
+	 *
 	 * @param key the key to look up.
 	 * @param defaultValue the value to return if the key does not exist.
 	 * @return the value of the specified key, or <tt>defaultValue</tt> if it is
@@ -144,7 +144,7 @@ public final class Config {
 
 	/**
 	 * Get the value of an integer key in <tt>nachos.conf</tt>.
-	 * 
+	 *
 	 * @param key the key to look up.
 	 * @return the value of the specified key.
 	 */
@@ -160,7 +160,7 @@ public final class Config {
 	/**
 	 * Get the value of an integer key in <tt>nachos.conf</tt>, returning the
 	 * specified default if the key does not exist.
-	 * 
+	 *
 	 * @param key the key to look up.
 	 * @param defaultValue the value to return if the key does not exist.
 	 * @return the value of the specified key, or <tt>defaultValue</tt> if the
@@ -193,7 +193,7 @@ public final class Config {
 
 	/**
 	 * Get the value of a double key in <tt>nachos.conf</tt>.
-	 * 
+	 *
 	 * @param key the key to look up.
 	 * @return the value of the specified key.
 	 */
@@ -209,7 +209,7 @@ public final class Config {
 	/**
 	 * Get the value of a double key in <tt>nachos.conf</tt>, returning the
 	 * specified default if the key does not exist.
-	 * 
+	 *
 	 * @param key the key to look up.
 	 * @param defaultValue the value to return if the key does not exist.
 	 * @return the value of the specified key, or <tt>defaultValue</tt> if the
@@ -246,7 +246,7 @@ public final class Config {
 
 	/**
 	 * Get the value of a boolean key in <tt>nachos.conf</tt>.
-	 * 
+	 *
 	 * @param key the key to look up.
 	 * @return the value of the specified key.
 	 */
@@ -262,7 +262,7 @@ public final class Config {
 	/**
 	 * Get the value of a boolean key in <tt>nachos.conf</tt>, returning the
 	 * specified default if the key does not exist.
-	 * 
+	 *
 	 * @param key the key to look up.
 	 * @param defaultValue the value to return if the key does not exist.
 	 * @return the value of the specified key, or <tt>defaultValue</tt> if the
