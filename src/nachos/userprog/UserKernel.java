@@ -112,7 +112,7 @@ public class UserKernel extends ThreadedKernel {
         root = process;
 
         String shellProgram = Machine.getShellProgramName();
-        Lib.assertTrue(process.execute(shellProgram, new String[] {}));
+        Lib.assertTrue(process.execute(shellProgram, new String[]{}));
 
         KThread.finish();
     }
@@ -164,7 +164,9 @@ public class UserKernel extends ThreadedKernel {
         return s;
     }
 
-    /** Globally accessible reference to the synchronized console. */
+    /**
+     * Globally accessible reference to the synchronized console.
+     */
     public static SynchConsole console;
 
     private static int offsetLen, offsetMask;
