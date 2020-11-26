@@ -19,3 +19,6 @@ hs_err_pid*
 # Binary stuff
 out/
 *tags*
+*.o
+*.out
+*.coff
